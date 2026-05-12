@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import PageHeader from "../components/PageHeader";
-import { customersData } from "../data/customersData.js";
+import axios from "axios";
 
 const getLoyaltyColor = (loyalty) => {
   switch (loyalty) {
@@ -16,14 +17,31 @@ const getLoyaltyColor = (loyalty) => {
 };
 
 export default function Customers() {
+  const [customers, setCustomers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [showAddModal, setShowAddModal] = useState(false);
   const [formData, setFormData] = useState({
-    customerId: "",
-    customerName: "",
+    firstName: "",
+    lastName: "",
     email: "",
     phone: "",
-    loyalty: "Bronze"
+    age: "",
+    gender: "male"
   });
+
+  useEffect(() => {
+    axios
+      .get("https://dummyjson.com/users")
+      .then((response) => {
+        setCustomers(response.data.users);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err.message);
+        setLoading(false);
+      });
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -31,19 +49,23 @@ export default function Customers() {
     console.log("New Customer:", formData);
     // Reset form
     setFormData({
-      customerId: "",
-      customerName: "",
+      firstName: "",
+      lastName: "",
       email: "",
       phone: "",
-      loyalty: "Bronze"
+      age: "",
+      gender: "male"
     });
     setShowAddModal(false);
-    // Note: Data not persisted to JSON file (static import). Would need state lift or backend.
+    // Note: Data not persisted to API. Would need backend.
   };
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
+  if (loading) return <div className="p-4">Loading...</div>;
+  if (error) return <div className="text-red-600 p-4">{error}</div>;
 
   return (
     <div>
@@ -66,10 +88,10 @@ export default function Customers() {
             <thead className="bg-gray-50">
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Customer ID
+                  ID
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Customer Name
+                  Name
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Email
@@ -78,18 +100,23 @@ export default function Customers() {
                   Phone
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Loyalty
+                  Age
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Gender
                 </th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {customersData.map((customer) => (
-                <tr key={customer.customerId} className="hover:bg-gray-50">
+              {customers.map((customer) => (
+                <tr key={customer.id} className="hover:bg-gray-50">
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                    {customer.customerId}
+                    {customer.id}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {customer.customerName}
+                    <Link to={`/customers/${customer.id}`} className="text-emerald-400 hover:text-emerald-500">
+                      {customer.firstName} {customer.lastName}
+                    </Link>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     {customer.email}
@@ -97,10 +124,11 @@ export default function Customers() {
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     {customer.phone}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getLoyaltyColor(customer.loyalty)}`}>
-                      {customer.loyalty}
-                    </span>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {customer.age}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {customer.gender}
                   </td>
                 </tr>
               ))}
@@ -119,22 +147,22 @@ export default function Customers() {
             <form onSubmit={handleSubmit} className="p-6">
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Customer ID</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">First Name</label>
                   <input
                     type="text"
-                    name="customerId"
-                    value={formData.customerId}
+                    name="firstName"
+                    value={formData.firstName}
                     onChange={handleChange}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     required
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Customer Name</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
                   <input
                     type="text"
-                    name="customerName"
-                    value={formData.customerName}
+                    name="lastName"
+                    value={formData.lastName}
                     onChange={handleChange}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     required
@@ -163,16 +191,26 @@ export default function Customers() {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Loyalty</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Age</label>
+                  <input
+                    type="number"
+                    name="age"
+                    value={formData.age}
+                    onChange={handleChange}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Gender</label>
                   <select
-                    name="loyalty"
-                    value={formData.loyalty}
+                    name="gender"
+                    value={formData.gender}
                     onChange={handleChange}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   >
-                    <option value="Bronze">Bronze</option>
-                    <option value="Silver">Silver</option>
-                    <option value="Gold">Gold</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
                   </select>
                 </div>
               </div>

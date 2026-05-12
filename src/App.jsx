@@ -7,6 +7,9 @@ import Loading from "./components/Loading";
 const Dashboard = lazy(() => import("./pages/Dashboard"));
 const Orders = lazy(() => import("./pages/Orders"));
 const Customers = lazy(() => import("./pages/Customers"));
+const CustomerDetail = lazy(() => import("./pages/CustomerDetail"));
+const Product = lazy(() => import("./pages/Product"));
+const ProductDetail = lazy(() => import("./pages/ProductDetail"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const BadRequest = lazy(() => import("./pages/BadRequest"));
 const Unauthorized = lazy(() => import("./pages/Unauthorized"));
@@ -23,6 +26,9 @@ function App() {
           <Route path="/" element={<Dashboard />} />
           <Route path="/orders" element={<Orders />} />
           <Route path="/customers" element={<Customers />} />
+          <Route path="/customers/:id" element={<CustomerDetail />} />
+          <Route path="/products" element={<Product />} />
+          <Route path="/products/:id" element={<ProductDetail />} />
           <Route path="/error/400" element={<BadRequest />} />
           <Route path="/error/401" element={<Unauthorized />} />
           <Route path="/error/403" element={<Forbidden />} />

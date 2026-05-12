@@ -14,7 +14,7 @@ export default function AuthLayout() {
                 <Outlet />
 
                 <p className="text-center text-sm text-gray-500 mt-6">
-                    © 2025 Sedap Restaurant Admin Dashboard. All rights
+                    © 2026 Sedap Restaurant Admin Dashboard. All rights
                     reserved.
                 </p>
             </div>
