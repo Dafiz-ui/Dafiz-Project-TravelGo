@@ -29,7 +29,7 @@ export default function Header() {
 
                 <div id="profile-container" className="flex items-center space-x-4 border-l pl-4 border-gray-300">
                     <span id="profile-text" className="font-barlow text-teks">
-                        Hello, <b>Fikri Muhaffizh</b>
+                        Hi, <b>Dafiz Zaidan</b>
                     </span>
                     <img
                         id="profile-avatar"
