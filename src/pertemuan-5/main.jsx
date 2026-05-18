@@ -17,6 +17,8 @@ const Products = React.lazy(() => import("./pages/Products")); // Kelola Paket
 const OrderList = React.lazy(() => import("./pages/OrderList")); // Kelola Booking
 const CustomerList = React.lazy(() => import("./pages/CustomerList")); // Verifikasi Pembayaran
 const UserList = React.lazy(() => import("./pages/UserList")); // Kelola User
+const UserDetail = React.lazy(() => import("./pages/UserDetail"));
+const ProductDetail = React.lazy(() => import("./pages/ProductDetail"));
 
 // ======================== AUTH PAGES ========================
 const Login = React.lazy(() => import("./pages/auth/Login"));
@@ -54,14 +56,11 @@ root.render(
           <Route element={<MainLayout />}>
             <Route path="/admin/dashboard" element={<Dashboard />} />
             <Route path="/admin/kelola-paket" element={<Products />} />
+            <Route path="/admin/products/:id" element={<ProductDetail />} />
             <Route path="/admin/kelola-booking" element={<OrderList />} />
             <Route path="/admin/verifikasi-pembayaran" element={<CustomerList />} />
             <Route path="/admin/kelola-user" element={<UserList />} />
-          </Route>
-
-          {/* ============ AUTH ROUTES ============ */}
-          <Route element={<AuthLayout />}>
-            <Route path="/login" element={<Login />} />
+          <Route path="/admin/kelola-user/:id" element={<UserDetail />} />
             <Route path="/register" element={<Register />} />
             <Route path="/forgot" element={<Forgot />} />
             <Route path="/unauthorized" element={<Unauthorized />} />

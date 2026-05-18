@@ -1,6 +1,7 @@
+import { Link } from "react-router-dom";
 import { useState } from "react";
 
-const initialUsers = [
+export const initialUsers = [
   { id: 1, name: "Maya", role: "Admin", email: "maya@travelgo.com" },
   { id: 2, name: "Rudi", role: "Staff Booking", email: "rudi@travelgo.com" },
   { id: 3, name: "Sari", role: "Customer Support", email: "sari@travelgo.com" },
@@ -34,8 +35,16 @@ export default function UserList() {
           <tbody className="bg-white divide-y divide-slate-200">
             {users.map((user) => (
               <tr key={user.id} className="hover:bg-slate-50">
-                <td className="px-4 py-4 font-medium">{user.id}</td>
-                <td className="px-4 py-4">{user.name}</td>
+                <td className="px-4 py-4 font-medium">
+                  <Link to={`/admin/kelola-user/${user.id}`} className="text-blue-600 hover:underline">
+                    {user.id}
+                  </Link>
+                </td>
+                <td className="px-4 py-4">
+                  <Link to={`/admin/kelola-user/${user.id}`} className="text-slate-900 hover:text-blue-700">
+                    {user.name}
+                  </Link>
+                </td>
                 <td className="px-4 py-4">{user.role}</td>
                 <td className="px-4 py-4">{user.email}</td>
               </tr>

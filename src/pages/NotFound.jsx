@@ -53,7 +53,7 @@ export default function NotFound() {
 
 
       {/* Not Found Bubble */}
-      <div className="bg-white rounded-xl shadow-lg p-8 w-full max-w-lg text-center"  style={{ zIndex: 1 }}>
+      <div className="bg-white rounded-xl shadow-lg p-8 w-full max-w-lg text-center" style={{ zIndex: 1 }}>
         <div className="mb-4">
           <svg
             className="mx-auto w-64 h-auto"

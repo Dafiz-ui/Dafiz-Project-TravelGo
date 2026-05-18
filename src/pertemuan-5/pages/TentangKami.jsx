@@ -1,4 +1,4 @@
-import { FaUsers, FaTarget, FaHeart } from "react-icons/fa";
+import { FaUsers, FaBullseye, FaHeart } from "react-icons/fa";
 
 export default function TentangKami() {
   return (

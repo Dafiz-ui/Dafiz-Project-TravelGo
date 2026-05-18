@@ -60,7 +60,7 @@ export default function Products() {
                 <tr key={item.id} className="hover:bg-slate-50 transition-colors duration-200">
                   <td className="px-4 py-4 font-medium">{index + 1}</td>
                   <td className="px-4 py-4 text-slate-900">
-                    <Link to={`/paket-wisata/${item.id}`} className="text-emerald-600 hover:underline">
+                    <Link to={`/admin/products/${item.id}`} className="text-emerald-600 hover:underline">
                       {item.title}
                     </Link>
                   </td>

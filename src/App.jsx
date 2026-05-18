@@ -19,6 +19,7 @@ import Users from './pages/Users'
 import Dashboard from './pages/Dashboard'
 import Products from './pages/Products'
 import ProductsDetail from './pages/ProductsDetail'
+import UserDetail from './pages/UserDetail'
 import Login from './pages/Login'
 import UserProfile from './pages/UserProfile'
 import UserSettings from './pages/UserSettings'
@@ -193,6 +194,7 @@ return (
           <Route path="/profile" element={<UserProfile />} />
           <Route path="/settings" element={<UserSettings />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/users/:id" element={<UserDetail />} />
           <Route path="/products/:id" element={<ProductsDetail />} />
           <Route path="/products" element={<Products />} />
           <Route path="/" element={<Navigate to="/dashboard" />} />

@@ -10,7 +10,7 @@ export default function Sidebar() {
   return (
     <aside className="w-72 bg-white min-h-screen border-r border-slate-200 shadow-sm">
       <div className="p-6">
-        <div className="text-3xl font-bold text-slate-900 mb-2">TravelAdmin</div>
+        <div className="text-3xl font-bold text-slate-900 mb-2">TravelGo</div>
         <div className="text-sm text-slate-500 mb-8">Admin Dashboard</div>
         <ul className="space-y-2">
           <li>
