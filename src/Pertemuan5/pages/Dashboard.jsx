@@ -4,7 +4,7 @@ import PageHeader from "../components/PageHeader";
 export default function Dashboard() {
     return (
         <div id="dashboard-container">
-            <PageHeader title="Dashboard" />
+            <PageHeader />
             <div id="dashboard-grid" className="p-5 grid sm:grid-cols-2 md:grid-cols-4 gap-4">
                 <div id="dashboard-orders" className="flex items-center space-x-5 bg-white rounded-lg shadow-md p-4">
                     <div id="orders-icon" className="bg-hijau rounded-full p-4">
@@ -41,12 +41,11 @@ export default function Dashboard() {
                         <FaDollarSign className="text-3xl text-white" />
                     </div>
                     <div id="revenue-info" className="flex flex-col">
-                        <span id="revenue-amount" className="text-2xl font-bold">Rp.128</span>
-                        <span id="revenue-text" className="text-gray-400">Total Revenue</span>
+                        <span id="revenue-amount" className="text-2xl font-bold">Rp.128.000</span>
+                        <span id="revenue-text" className="text-gray-400">Total </span>
                     </div>
                 </div>
             </div>
         </div>
     );
 }
-
