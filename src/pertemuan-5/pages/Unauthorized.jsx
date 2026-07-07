@@ -12,11 +12,12 @@ export default function Unauthorized() {
         Kamu tidak memiliki akses untuk halaman ini. Silakan hubungi administrator jika ini adalah kesalahan.
       </p>
       <button
-        onClick={() => navigate("/login")}
+        onClick={() => navigate("/admin/dashboard")}
         className="px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-md shadow-md transition duration-300"
       >
-        Kembali ke Login
+        Kembali ke Admin Dashboard
       </button>
+
     </div>
   );
 }

@@ -2,9 +2,13 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 
+
 export default function Login() {
   const navigate = useNavigate();
 
+  const handleClose = () => {
+    navigate(-1);
+  };
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -12,9 +16,9 @@ export default function Login() {
     navigate("/dashboard");
   };
 
-
   return (
     <div className="min-h-screen bg-blue-500 flex items-center justify-center relative overflow-hidden">
+
       {/* SVG Background */}
       <svg
         width="1440"
@@ -118,6 +122,15 @@ export default function Login() {
           >
             Sign In
           </button>
+
+          <button
+            type="button"
+            onClick={handleClose}
+            className="w-full mt-3 bg-white text-gray-700 border border-gray-300 py-2 rounded-md hover:bg-gray-50 transition"
+          >
+            Close
+          </button>
+
         </form>
 
 

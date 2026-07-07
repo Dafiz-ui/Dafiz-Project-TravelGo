@@ -1,16 +1,56 @@
 import { Link, useParams } from "react-router-dom";
-import { initialUsers } from "./UserList";
+import { useEffect, useState } from "react";
+import { getProfileById } from "../utils/supabase";
 
 export default function UserDetail() {
   const { id } = useParams();
-  const user = initialUsers.find((item) => String(item.id) === String(id));
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    let mounted = true;
+    (async () => {
+      try {
+        setLoading(true);
+        setError("");
+
+        const row = await getProfileById(id);
+        if (mounted) setUser(row || null);
+      } catch (e) {
+        if (mounted) {
+          setUser(null);
+          setError(e?.message || "Gagal memuat detail user");
+        }
+      } finally {
+        if (mounted) setLoading(false);
+      }
+    })();
+
+    return () => {
+      mounted = false;
+    };
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="rounded-3xl bg-white p-8 shadow-sm border border-slate-200">
+        Memuat detail...
+      </div>
+    );
+  }
 
   if (!user) {
     return (
       <div className="rounded-3xl bg-white p-8 shadow-sm border border-slate-200">
         <h1 className="text-3xl font-semibold mb-4">User tidak ditemukan</h1>
-        <p className="text-slate-600 mb-6">ID user yang Anda pilih tidak tersedia. Silakan kembali ke daftar user.</p>
-        <Link to="/admin/kelola-user" className="inline-flex items-center rounded-2xl bg-blue-600 px-5 py-3 text-white hover:bg-blue-700">
+        <p className="text-slate-600 mb-6">
+          ID user yang Anda pilih tidak tersedia. Silakan kembali ke daftar user.
+        </p>
+        <Link
+          to="/admin/kelola-user"
+          className="inline-flex items-center rounded-2xl bg-blue-600 px-5 py-3 text-white hover:bg-blue-700"
+        >
           Kembali ke Daftar User
         </Link>
       </div>
@@ -23,13 +63,22 @@ export default function UserDetail() {
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p className="text-slate-500">Detail User</p>
-            <h1 className="text-3xl font-semibold text-slate-900">{user.name}</h1>
+            <h1 className="text-3xl font-semibold text-slate-900">{user.name || "-"}</h1>
           </div>
-          <Link to="/admin/kelola-user" className="rounded-2xl bg-slate-50 px-4 py-3 text-slate-700 hover:bg-slate-100">
+          <Link
+            to="/admin/kelola-user"
+            className="rounded-2xl bg-slate-50 px-4 py-3 text-slate-700 hover:bg-slate-100"
+          >
             Kembali ke Daftar User
           </Link>
         </div>
       </div>
+
+      {error ? (
+        <div className="rounded-3xl bg-red-50 p-6 shadow-sm border border-red-200 text-red-700">
+          {error}
+        </div>
+      ) : null}
 
       <div className="grid gap-4 xl:grid-cols-2">
         <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
@@ -37,11 +86,11 @@ export default function UserDetail() {
           <div className="mt-6 space-y-4">
             <div>
               <p className="text-slate-500">Nama</p>
-              <p className="text-xl font-semibold text-slate-900">{user.name}</p>
+              <p className="text-xl font-semibold text-slate-900">{user.name || "-"}</p>
             </div>
             <div>
               <p className="text-slate-500">Role</p>
-              <p className="text-xl font-semibold text-slate-900">{user.role}</p>
+              <p className="text-xl font-semibold text-slate-900">{user.role || "-"}</p>
             </div>
             <div>
               <p className="text-slate-500">Email</p>
@@ -66,3 +115,4 @@ export default function UserDetail() {
     </div>
   );
 }
+

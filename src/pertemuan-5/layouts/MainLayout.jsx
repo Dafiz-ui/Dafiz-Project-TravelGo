@@ -5,7 +5,7 @@ import Header from './Header';
 
 const MainLayout = () => {
   return (
-    <div className="min-h-screen bg-slate-100">
+    <div className="min-h-screen bg-slate-50">
       <div className="flex min-h-screen">
         <Sidebar />
         <div className="flex-1 flex flex-col">
@@ -22,3 +22,4 @@ const MainLayout = () => {
 };
 
 export default MainLayout;
+

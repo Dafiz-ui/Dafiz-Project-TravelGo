@@ -18,9 +18,14 @@ export default function Home() {
           <p className="text-lg uppercase tracking-widest text-white/80 mb-4 font-semibold">Temukan Petualanganmu</p>
           <h1 className="text-6xl md:text-7xl font-bold mb-6 leading-tight">Jelajahi Keindahan Indonesia</h1>
           <p className="text-xl md:text-2xl mb-10 text-white/90 max-w-2xl mx-auto">Ciptakan kenangan indah bersama keluarga tercinta ke destinasi impian dengan paket wisata terpercaya</p>
-          <Link to="/paket-wisata" className="inline-flex items-center gap-3 bg-white text-teal-600 font-bold px-10 py-4 rounded-2xl hover:shadow-2xl hover:scale-105 transition-all duration-300">
-            Mulai Jelajahi <FaArrowRight className="text-lg" />
-          </Link>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link to="/paket-wisata" className="inline-flex items-center gap-3 bg-white text-teal-600 font-bold px-10 py-4 rounded-2xl hover:shadow-2xl hover:scale-105 transition-all duration-300">
+              Mulai Jelajahi <FaArrowRight className="text-lg" />
+            </Link>
+            <Link to="/member/login" className="inline-flex items-center justify-center rounded-2xl border border-white/80 bg-white/10 px-10 py-4 text-white font-bold hover:bg-white/20 transition-all duration-300">
+              Login Member
+            </Link>
+          </div>
         </div>
       </section>
 

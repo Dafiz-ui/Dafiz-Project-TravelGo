@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { FaHome, FaUsers, FaBox, FaSignOutAlt, FaLayerGroup } from "react-icons/fa";
+import { FaHome, FaUsers, FaBox, FaSignOutAlt, FaLayerGroup, FaBook, FaClipboardList } from "react-icons/fa";
 
 export default function Sidebar() {
   const menuClass = ({ isActive }) =>
@@ -28,6 +28,18 @@ export default function Sidebar() {
             <NavLink to="/products" className={menuClass}>
               <FaBox />
               <span>Products</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/user-crud-enhanced" className={menuClass}>
+              <FaBook />
+              <span>Hooks User CRUD</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/product-crud-enhanced" className={menuClass}>
+              <FaClipboardList />
+              <span>Hooks Product CRUD</span>
             </NavLink>
           </li>
           <li>

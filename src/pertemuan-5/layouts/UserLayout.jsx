@@ -33,6 +33,7 @@ const UserLayout = () => {
                 </Link>
               </div>
             </div>
+
           </div>
         </nav>
 
@@ -52,7 +53,7 @@ const UserLayout = () => {
                 <p className="text-slate-400">Platform wisata terpercaya untuk liburan sempurna Anda.</p>
               </div>
               <div>
-                <h4 className="font-semibold mb-4">Menu</h4>
+                <h4 className="font-semibold mb-4">Support</h4>
                 <ul className="space-y-2 text-slate-400">
                   <li><Link to="/" className="hover:text-white">Home</Link></li>
                   <li><Link to="/paket-wisata" className="hover:text-white">Paket Wisata</Link></li>

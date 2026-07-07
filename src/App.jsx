@@ -24,6 +24,8 @@ import Login from './pages/Login'
 import UserProfile from './pages/UserProfile'
 import UserSettings from './pages/UserSettings'
 import FiturXYZ from './pages/FiturXYZ'
+import UserCRUDEnhanced from './UserCRUDEnhanced'
+import ProductCRUDEnhanced from './ProductCRUDEnhanced'
 
 
 import { Navigate } from 'react-router-dom'
@@ -198,6 +200,8 @@ return (
           <Route path="/users/:id" element={<UserDetail />} />
           <Route path="/products/:id" element={<ProductsDetail />} />
           <Route path="/products" element={<Products />} />
+          <Route path="/user-crud-enhanced" element={<UserCRUDEnhanced />} />
+          <Route path="/product-crud-enhanced" element={<ProductCRUDEnhanced />} />
           <Route path="/fitur-xyz" element={<FiturXYZ />} />
           <Route path="/" element={<Navigate to="/dashboard" />} />
           <Route path="*" element={<NotFound />} />
